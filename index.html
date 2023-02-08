@@ -1,0 +1,64 @@
+<DOCTIPE html>
+<html>
+<head>
+<script>
+// canvasの取得
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+
+// canvasの大きさをウィンドウの大きさに設定
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+// 画面に表示する円の数
+var count = 50;
+
+// 円のオブジェクトの配列
+var circles = [];
+
+// 円のオブジェクトの作成
+for (var i = 0; i < count; i++) {
+  var x = Math.random() * canvas.width;
+  var y = Math.random() * canvas.height;
+  var vx = Math.random() * 4 - 2;
+  var vy = Math.random() * 4 - 2;
+  var radius = Math.random() * 30 + 10;
+  circles.push({ x: x, y: y, vx: vx, vy: vy, radius: radius });
+}
+
+// アニメーションの設定
+var animate = function () {
+  requestAnimationFrame(animate);
+
+  // 背景をクリア
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // 円を描画
+  for (var i = 0; i < count; i++) {
+    var c = circles[i];
+    ctx.beginPath();
+    ctx.arc(c.x, c.y, c.radius, 0, 2 * Math.PI);
+    ctx.fillStyle = "white";
+    ctx.fill();
+
+    // 円の移動
+    c.x += c.vx;
+    c.y += c.vy;
+
+    // 画面の端に達した場合の処理
+    if (c.x + c.radius > canvas.width || c.x - c.radius < 0) {
+      c.vx = -c.vx;
+    }
+    if (c.y + c.radius > canvas.height || c.y - c.radius < 0) {
+      c.vy = -c.vy;
+    }
+  }
+};
+animate();
+
+</script>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+
+</body>
