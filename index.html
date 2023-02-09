@@ -3,7 +3,7 @@
 <head>
   <style>
     body{
-    background-color:black;
+    background-color:white;
       background-attachment: fixed;
     }
     canvas{
@@ -50,7 +50,7 @@ var animate = function () {
     var c = circles[i];
     ctx.beginPath();
     ctx.arc(c.x, c.y, c.radius, 0, 2 * Math.PI);
-    ctx.fillStyle = "purple";
+    ctx.fillStyle = "lightcyan";
     ctx.fill();
 
     // 円の移動
